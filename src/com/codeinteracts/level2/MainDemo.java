@@ -40,6 +40,12 @@ public class MainDemo {
 		teacher1.printProperties();
 		teacher2.printProperties();
 		
+		int[] a = { 1, 2, 3, 4, 5 };
+		int target = 5;
+		
+		//		String word = "This is an apples ";
+		//		output = 6
+
 	}
 	
 }
