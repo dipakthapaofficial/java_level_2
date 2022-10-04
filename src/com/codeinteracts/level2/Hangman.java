@@ -12,13 +12,13 @@ public class Hangman {
 		
 		char guessedCharater = new Scanner(System.in).next().charAt(0);
 		
-		if (guess is wrong) {
-			attempts--;
-		}
-		
-		if (attempts == 0) {
-			stop game. 
-		}
+		//		if (guess is wrong) {
+		//			attempts--;
+		//		}
+		//		
+		//		if (attempts == 0) {
+		//			stop game. 
+		//		}
 		
 	}
 	
