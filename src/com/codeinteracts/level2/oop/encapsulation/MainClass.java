@@ -1,5 +1,6 @@
 package com.codeinteracts.level2.oop.encapsulation;
 
+import com.exceptions.enums.Gender;
 
 public class MainClass {
 	
@@ -24,6 +25,12 @@ public class MainClass {
 		
 		student1.printName();
 		student2.printName();
+		
+		for (Gender gen : Gender.values()) {
+			System.out.println(gen);
+			System.out.println(gen.getValue());
+			System.out.println(gen.ordinal());
+		}
 	}
 	
 }
