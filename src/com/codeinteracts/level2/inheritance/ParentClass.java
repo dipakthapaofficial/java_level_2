@@ -1,6 +1,5 @@
 package com.codeinteracts.level2.inheritance;
 
-
 public class ParentClass {
 	
 	String firstName;
@@ -8,7 +7,7 @@ public class ParentClass {
 	String lastName;
 	
 	Long salary;
-
+	
 	void printFamilyName() {
 		System.out.println("Inside print family name.. parent class");
 		System.out.println(lastName);
@@ -17,5 +16,6 @@ public class ParentClass {
 	void printSalary() {
 		System.out.println(salary);
 	}
-
+	
+	
 }
