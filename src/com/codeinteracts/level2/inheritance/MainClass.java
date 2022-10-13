@@ -45,29 +45,32 @@ public class MainClass {
 		child.salary = 2000L;
 		child.school = "Something prep school";
 		
-		parent.printFamilyName();
+		//		parent.printFamilyName();
+		//		
+		//		child.printFamilyName();
 		
-		child.printFamilyName();
+		ParentClass p1 = new ParentClass();
+		p1.printFamilyName();
 		
-		GrandChild grandChild = new GrandChild();
-		grandChild.printlastName();
-		
-		MainClass main = new MainClass();
-		int result = main.add(1, 2);
-		System.out.println(result);
-		
-		float res1 = main.add(1f, 2f);
-		System.out.println(res1);
-		
-		result = main.add(1, 2, 3);
-		System.out.println(result);
-		
-		int a[] = { 1, 2, 3 };
-		result = main.add(a);
-		System.out.println(result);
-		
-		result = main.add(1, 2, 3, 4, 5, 6, 7);
-		System.out.println(result);
+		//		GrandChild grandChild = new GrandChild();
+		//		grandChild.printlastName();
+		//		
+		//		MainClass main = new MainClass();
+		//		int result = main.add(1, 2);
+		//		System.out.println(result);
+		//		
+		//		float res1 = main.add(1f, 2f);
+		//		System.out.println(res1);
+		//		
+		//		result = main.add(1, 2, 3);
+		//		System.out.println(result);
+		//		
+		//		int a[] = { 1, 2, 3 };
+		//		result = main.add(a);
+		//		System.out.println(result);
+		//		
+		//		result = main.add(1, 2, 3, 4, 5, 6, 7);
+		//		System.out.println(result);
 		
 	}
 	
