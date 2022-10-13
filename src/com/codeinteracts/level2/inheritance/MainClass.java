@@ -72,6 +72,8 @@ public class MainClass {
 		//		result = main.add(1, 2, 3, 4, 5, 6, 7);
 		//		System.out.println(result);
 		
+		Intersection inter = new Intersection();
+		
 	}
 	
 }
