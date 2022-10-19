@@ -1,6 +1,5 @@
 package com.codeinteracts.level2.inheritance;
 
-
 public class ChildClass extends ParentClass {
 	
 	String school;
@@ -20,5 +19,6 @@ public class ChildClass extends ParentClass {
 	@Override
 	int add(int a, int b) {
 		return super.add(a, b);
+		
 	}
 }

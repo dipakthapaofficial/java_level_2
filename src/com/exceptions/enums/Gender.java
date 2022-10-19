@@ -3,17 +3,34 @@ package com.exceptions.enums;
 
 public enum Gender {
 	
-	MALE("M"),
-	OTHERS("O"),
-	FEMALE("F");
+	OTHERS("Others", 1),
+	MALE("Male", 2),
+	FEMALE("Female", 3);
 	
-	private String val;
+	private String value;
 	
-	Gender(String val) {
-		this.val = val;
+	private int id;
+	
+	private Gender(String value, int id) {
+		this.value = value;
+		this.id = id;
 	}
 	
 	public String getValue() {
-		return this.val;
+		return value;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public static Gender findGenderById(int id) {
+		for (Gender gen : Gender.values()) {
+			if (gen.id == id) {
+				return gen;
+			}
+		}
+		return null;
+	}
+	
 }
