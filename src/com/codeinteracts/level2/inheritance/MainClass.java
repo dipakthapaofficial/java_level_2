@@ -1,6 +1,15 @@
 package com.codeinteracts.level2.inheritance;
 
+import com.codeinteracts.abstraction.Audi;
+import com.codeinteracts.abstraction.SportsVehicle;
+
 public class MainClass {
+	
+	int a;
+	
+	ParentClass p;
+	
+	SportsVehicle sv;
 	
 	int add(int a, int b) {
 		System.out.println("Inside integer add method");
@@ -34,6 +43,11 @@ public class MainClass {
 	}
 	
 	public static void main(String[] args) {
+		MainClass mainClass = new MainClass();
+		mainClass.a = 10;
+		mainClass.p = new ParentClass();
+		mainClass.sv = (SportsVehicle) new Audi();
+		
 		ParentClass parent = new ParentClass();
 		parent.firstName = "John";
 		parent.lastName = "Wick";

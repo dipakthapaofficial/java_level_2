@@ -16,5 +16,9 @@ public class ChildClass extends ParentClass {
 	void printSalary() {
 		System.out.println(salary - 100);
 	}
-
+	
+	@Override
+	int add(int a, int b) {
+		return super.add(a, b);
+	}
 }

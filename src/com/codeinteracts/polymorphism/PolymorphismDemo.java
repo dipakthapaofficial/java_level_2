@@ -29,6 +29,7 @@ public class PolymorphismDemo {
 	}
 	
 	int add(int... numbers) {
+		//Ellipses
 		System.out.println("INside integer addition of 5 or more numbers");
 		//		int sum = a + b + c + d;
 		int sum = 0;

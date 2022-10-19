@@ -59,6 +59,7 @@ public class MatrixMul {
 		
 		int[][] matMul = mul.multiplyMatrix(matrix1, matrix2);
 		mul.printMatrix(matMul);
+		
 
 	}
 	

@@ -17,5 +17,8 @@ public class ParentClass {
 		System.out.println(salary);
 	}
 	
+	int add(int a, int b) {
+		return a + b;
+	}
 	
 }

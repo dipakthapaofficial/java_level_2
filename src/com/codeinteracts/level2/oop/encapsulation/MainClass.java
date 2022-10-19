@@ -5,6 +5,7 @@ import com.exceptions.enums.Gender;
 public class MainClass {
 	
 	public static void main(String[] args) {
+		
 		Student student1 = new Student();
 		student1.firstName = "John";
 		student1.lastName = "Doe";
