@@ -27,15 +27,35 @@ public class Employee {
 	}
 	
 	public static void main(String[] args) {
-		Employee emp = new Employee();
-		emp = emp.insertData();
-		System.out.println(emp.toString());
+		Employee[] employees = new Employee[5];
+		//		Integer emp1 = null;
+		//		System.out.println(emp1 + 2);
 		
-		Employee emp2 = new Employee();
-		emp2 = emp2.insertData();
-		System.out.println(emp2.toString());
+		for (int i = 0; i < 1; i++) {
+			Employee emp = new Employee();
+			emp = emp.insertData();
+			System.out.println(emp.toString());
+			employees[i] = emp;
+		}
 		
-		System.out.println(emp.gender == emp2.gender);
+		
+		
+		for (Employee emp : employees) {
+			//			if (emp != null) {
+			System.out.println(emp);
+				System.out.println(emp.toString());
+			//			}
+		}
+		
+		//		Employee emp2 = new Employee();
+		//		emp2 = emp2.insertData();
+		//		System.out.println(emp2.toString());
+		//		
+		//		System.out.println(emp.gender == emp2.gender);
+		//		
+		//		Employee emp3 = new Employee();
+		//		emp3 = emp3.insertData();
+		//		System.out.println(emp3.toString());
 		
 	}
 	
