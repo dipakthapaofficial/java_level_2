@@ -2,6 +2,8 @@ package com.codeinteracts.abstraction;
 
 public class MainClass {
 	
+	public static Animal[] animals = new Animal[5];
+	
 	public static void main(String[] args) {
 		Animal animal = new Dog();
 		

@@ -1,14 +1,18 @@
 package com.exceptions.enums;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Employee {
+	
+	public static Employee[] employees = new Employee[5];
 	
 	String firstName;
 	
 	Gender gender;
 	
-	public Employee insertData() {
+	public static Employee insertData() {
 		Scanner sc = new Scanner(System.in);
 		Employee emp = new Employee();
 		
@@ -23,11 +27,51 @@ public class Employee {
 		int genderId = sc.nextInt();
 		emp.firstName = firstName;
 		emp.gender = Gender.findGenderById(genderId);
+		
+		//Login
+		LocalDateTime checkin = LocalDateTime.now();
+		
+		//Logout
+		LocalDateTime checkout = LocalDateTime.now();
+		
 		return emp;
 	}
 	
+	public static void login(Scanner sc) {
+		System.out.println("Enter id:");
+		int id = sc.nextInt();
+		
+		System.out.println("Enter pass::");
+		String pass = sc.nextLine();
+		
+
+	}
+	
 	public static void main(String[] args) {
-		Employee[] employees = new Employee[5];
+		System.out.println("...........Employee management system..........");
+		System.out.println("1. Add employee");
+		System.out.println("2. login");
+		System.out.println("3. logout");
+		System.out.println("4. Get paycheck");
+		Scanner sc = new Scanner(System.in);
+		
+		int choice = sc.nextInt();
+		
+		LocalDateTime date1 = LocalDateTime.now();
+		LocalDateTime date2 = LocalDateTime.now();
+		
+		Date date3 = new Date();
+		date3.getYear();
+		
+		switch (choice) {
+			case 1:
+				insertData();
+				break;
+			case 2:
+				login(sc);
+				break;
+		}
+		
 		//		Integer emp1 = null;
 		//		System.out.println(emp1 + 2);
 		

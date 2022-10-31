@@ -59,6 +59,8 @@ public class MainClass {
 		child.salary = 2000L;
 		child.school = "Something prep school";
 		
+		ParentClass pc = new ChildClass();
+		
 		//		parent.printFamilyName();
 		//		
 		//		child.printFamilyName();
