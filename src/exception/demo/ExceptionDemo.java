@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.security.auth.login.LoginException;
+
 public class ExceptionDemo {
 	
 	void doSomething() {
@@ -22,7 +24,7 @@ public class ExceptionDemo {
 	 * @throws ArithmeticException
 	 */
 	
-	int divide(int a, int b) throws ArithmeticException {
+	int divide(int a, int b) throws ArithmeticException, RuntimeException {
 		int result = 0;
 		try {
 			result = a / b;
@@ -48,6 +50,8 @@ public class ExceptionDemo {
 			if (username != null) {
 				String[] something = username.split(" ");
 			} else {
+				System.out.println("Do something");
+				
 				throw new LoginException("Username is null");
 			}
 			
@@ -156,7 +160,7 @@ public class ExceptionDemo {
 		}
 		catch (LoginException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.message);
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 		
