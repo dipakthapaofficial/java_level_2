@@ -14,7 +14,7 @@ public class BufferedWriterDemo {
 		Scanner sc = new Scanner(System.in);
 		try {
 			//			BufferedReader br = new BufferedReader(new FileReader("hello.txt"));
-			BufferedWriter bw = new BufferedWriter(new FileWriter("helloAgain.txt"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("helloAgain.txt", true));
 			//			
 			//			String line = br.readLine();
 			//			
@@ -24,7 +24,7 @@ public class BufferedWriterDemo {
 			//			}
 			
 			
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 1; i++) {
 				System.out.println("Enter you name::");
 				String name = sc.next();
 				//				bw.write(name + ", ");
@@ -39,13 +39,12 @@ public class BufferedWriterDemo {
 				String gender = sc.next();
 				//				bw.write(gender + ", ");
 				//				bw.write("\n");
-				//				bw.flush();
 				
 				Employee emp = new Employee();
 				emp.name = name;
 				emp.age = age;
 				emp.gender = gender;
-				
+				//				
 				System.out.println(emp);
 				
 				bw.write(emp.toString());

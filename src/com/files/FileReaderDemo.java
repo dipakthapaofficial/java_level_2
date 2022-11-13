@@ -15,8 +15,8 @@ public class FileReaderDemo {
 		//		Reader reader = null;
 		InputStreamReader red;
 		
-		try (FileReader reader = new FileReader("Desktop/hello.txt")) {
-			//			writer = new FileWriter("src/helloAgain.txt");
+		try (FileReader reader = new FileReader("hello.txt")) {
+			writer = new FileWriter("helloAgain123.txt");
 			
 			int value = reader.read();
 			//			char[] c = new char[100];
@@ -26,7 +26,8 @@ public class FileReaderDemo {
 			
 			while (value != -1) {
 				System.out.println((char) value);
-				//				writer.write(value);
+				writer.write(value);
+				writer.flush();
 				value = reader.read();
 			}
 		}
