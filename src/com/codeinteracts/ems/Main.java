@@ -65,6 +65,9 @@ public class Main {
 						empService.viewAll();
 					} else if (choice == 5) {
 						//Remove Employee
+						String[] a = new String[5];
+						a[0] = "10";
+						a[0] = null;
 					} else if (choice == 6) {
 						//Logout
 						System.out.println("Logged out successfully!");
