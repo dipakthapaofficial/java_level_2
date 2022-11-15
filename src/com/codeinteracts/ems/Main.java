@@ -169,7 +169,13 @@ public class Main {
 						
 					} else if (choice == 4) {
 						//View all employee
-						empService.viewAll();
+						try {
+							empService.viewAll();
+						}
+						catch (IOException e) {
+							System.out.println("Failed to fetch records!!");
+							e.printStackTrace();
+						}
 					} else if (choice == 5) {
 						//Search employee
 						
@@ -209,11 +215,43 @@ public class Main {
 						empService.viewProfile(emp);
 					} else if (choice == 2) {
 						//Edit Profile
+						System.out.println("Enter first name::");
+						String firstName = scan.next();
+						emp.setFirstName(firstName);
+						
+						System.out.println("Enter last name::");
+						String lastName = scan.next();
+						emp.setLastName(lastName);
+						
+						Gender g = null;
+						while (true) {
+							System.out.println("1.Male\t 2.Female\t 3.Others");
+							System.out.println("Choose the gender.");
+							int genderChoice = scan.nextInt();
+							if (genderChoice == 1) {
+								g = Gender.MALE;
+							} else if (genderChoice == 2) {
+								g = Gender.FEMALE;
+							} else if (genderChoice == 3) {
+								g = Gender.OTHERS;
+							} else {
+								System.out.println("Invalid option.");
+								continue;
+							}
+							break;
+						}
+						emp.setGender(g);
+						
+						System.out.println("Enter password::");
+						String password1 = scan.next();
+						emp.setPassword(password1);
+						
 						try {
 							empService.editProfile(emp);
 						}
 						catch (IOException e) {
-							System.out.println("Failed to edit profile!!");
+							// TODO Auto-generated catch block
+							System.out.println("Update failed!!");
 							e.printStackTrace();
 						}
 					} else if (choice == 3) {

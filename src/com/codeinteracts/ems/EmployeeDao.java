@@ -74,6 +74,8 @@ public class EmployeeDao {
 			} else {
 				builder.append(line);
 			}
+			builder.append("\n");
+			line = reader.readLine();
 		}
 		reader.close();
 		
@@ -85,6 +87,16 @@ public class EmployeeDao {
 		
 		bw.close();
 		
+	}
+	
+	public void viewAll() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+		String line = reader.readLine();
+		
+		while (line != null) {
+			System.out.println(line);
+			line = reader.readLine();
+		}
 	}
 	
 	//File Storage
@@ -155,7 +167,7 @@ public class EmployeeDao {
 		//Count number of lines in file and generate id based on that
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		int count = (int) reader.lines().count();
-		emp.setId(count++);
+		emp.setId(++count);
 		reader.close();
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter("employee.txt", true));
@@ -247,6 +259,7 @@ public class EmployeeDao {
 			} else {
 				builder.append(line);
 			}
+			line = reader.readLine();
 		}
 		reader.close();
 		

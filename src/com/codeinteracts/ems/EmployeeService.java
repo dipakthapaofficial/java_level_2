@@ -4,13 +4,16 @@ import java.io.IOException;
 
 public class EmployeeService {
 	
-	public void viewAll() {
+	public void viewAll() throws IOException {
 		//		for (Employee emp : EmployeeDao.employeeList) {
 		//			if (emp != null) {
 		//				System.out.println(emp);
 		//			}
 		//			
 		//		}
+		
+		EmployeeDao dao = new EmployeeDao();
+		dao.viewAll();
 	}
 	
 	/**
@@ -74,7 +77,8 @@ public class EmployeeService {
 		return emp;
 	}
 	
-	boolean checkIfUserNameExists(String username) {
+	
+	public boolean checkIfUserNameExists(String username) {
 		//			for (Employee emp : EmployeeDao.employeeList) {
 		//				if (emp != null && emp.getUsername().equals(username)) {
 		//					return true;
