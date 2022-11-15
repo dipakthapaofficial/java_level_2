@@ -14,6 +14,7 @@ public class EmployeeDao {
 	//	static int index = 0;
 	//	
 	static int runningId = 1;
+	
 	//	
 	//	static {
 	//		Employee emp = new Employee();
@@ -44,11 +45,47 @@ public class EmployeeDao {
 	//		System.out.println("Removed successfully.");
 	//		
 	//	}
-	//	
-	//	public void editEmployee(Employee emp) {
-	//		//Nothing to edit
 	//
-	//	}
+	
+	/**
+	 * Directly searching and replacing is not possible, we copy the content of file in string
+	 * builder, then replace the content in builder. Then write the existing again in create mode
+	 * and replace with value stored in builder
+	 * 
+	 * @param emp
+	 * @throws IOException
+	 */
+	public void editEmployee(Employee emp) throws IOException {
+		//Find the line, store it in string builder and replace the content with new employee object
+		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+		String line = reader.readLine();
+		StringBuilder builder = new StringBuilder();
+		while (line != null) {
+			String[] values = line.split(", ");
+			boolean matches = false;
+			for (String val : values) {
+				if (val.contains("id") && val.equals("id=" + emp.getId())) {
+					matches = true;
+					break;
+				}
+			}
+			if (matches) {
+				builder.append(emp.toString());
+			} else {
+				builder.append(line);
+			}
+		}
+		reader.close();
+		
+		//Now, open the same file and rewrite the file. It replaces old content with newly replaced content
+		BufferedWriter bw = new BufferedWriter(new FileWriter("employee.txt"));
+		bw.write(builder.toString());
+		bw.write("\n");
+		bw.flush();
+		
+		bw.close();
+		
+	}
 	
 	//File Storage
 	
@@ -115,6 +152,12 @@ public class EmployeeDao {
 	}
 	
 	Employee addEmployee(Employee emp) throws IOException {
+		//Count number of lines in file and generate id based on that
+		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+		int count = (int) reader.lines().count();
+		emp.setId(count++);
+		reader.close();
+		
 		BufferedWriter bw = new BufferedWriter(new FileWriter("employee.txt", true));
 		bw.write(emp.toString());
 		bw.write("\n");
@@ -180,8 +223,40 @@ public class EmployeeDao {
 			line = reader.readLine();
 			
 		}
+		
 		reader.close();
 		return emp;
+	}
+	
+	public void removeEmployee(Employee emp) throws IOException {
+		//Find the line, store it in string builder and replace the content with empty string
+		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+		String line = reader.readLine();
+		StringBuilder builder = new StringBuilder();
+		while (line != null) {
+			String[] values = line.split(", ");
+			boolean matches = false;
+			for (String val : values) {
+				if (val.contains("id") && val.equals("id=" + emp.getId())) {
+					matches = true;
+					break;
+				}
+			}
+			if (matches) {
+				builder.append("");
+			} else {
+				builder.append(line);
+			}
+		}
+		reader.close();
+		
+		//Now, open the same file and rewrite the file. It replaces old content with newly replaced content
+		BufferedWriter bw = new BufferedWriter(new FileWriter("employee.txt"));
+		bw.write(builder.toString());
+		bw.write("\n");
+		bw.flush();
+		
+		bw.close();
 	}
 	
 }

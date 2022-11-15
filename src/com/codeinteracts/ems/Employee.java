@@ -34,6 +34,17 @@ public class Employee {
 		this.employeeType = employeeType;
 	}
 	
+	public Employee(String firstName, String lastName, Gender gender, String username, String password,
+	    EmployeeType employeeType) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.username = username;
+		this.password = password;
+		this.employeeType = employeeType;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

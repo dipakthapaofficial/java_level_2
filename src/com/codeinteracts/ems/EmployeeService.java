@@ -28,7 +28,7 @@ public class EmployeeService {
 		return null;
 	}
 	
-	boolean removeEmployee(Integer id) {
+	boolean removeEmployee(Integer id) throws IOException {
 		System.out.println("Enter employee id::");
 		
 		Employee emp = this.searchById(id);
@@ -38,7 +38,9 @@ public class EmployeeService {
 		}
 		
 		EmployeeDao dao = new EmployeeDao();
-		//		dao.removeEmployee(emp);
+		dao.removeEmployee(emp);
+		
+		System.out.println("Removed the account successfully!");
 		
 		return false;
 	}
@@ -57,16 +59,18 @@ public class EmployeeService {
 	 * Edit employee profile
 	 * 
 	 * @param emp
+	 * @throws IOException
 	 */
-	//	public void editProfile(Employee emp, Scanner sc) {
-	//		EmployeeDao dao = new EmployeeDao();
-	//		dao.editEmployee(emp);
-	//	}
+	public void editProfile(Employee emp) throws IOException {
+		EmployeeDao dao = new EmployeeDao();
+		dao.editEmployee(emp);
+		System.out.println("Edited Successfully.");
+	}
 	
 	public Employee addEmployee(Employee emp) throws IOException {
 		EmployeeDao dao = new EmployeeDao();
 		dao.addEmployee(emp);
-		System.out.println("employee addedd successfully!");
+		System.out.println("Employee added successfully!");
 		return emp;
 	}
 	
