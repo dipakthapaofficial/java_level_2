@@ -101,6 +101,59 @@ public class EmployeeDao {
 	
 	//File Storage
 	
+	Employee searchById(Integer id) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+		
+		String line = reader.readLine();
+		Employee emp = null;
+		
+		while (line != null) {
+			boolean matches = false;
+			String[] values = line.split(", ");
+			
+			String firstName = null;
+			String lastName = null;
+			Gender g = null;
+			EmployeeType type = null;
+			
+			for (String val : values) {
+				if (val.contains("id") && val.equals("id=" + id)) {
+					matches = true;
+				}
+				
+				if (val.contains("id=")) {
+					String vals[] = val.split("=");
+					id = Integer.parseInt(vals[1]);
+				} else if (val.contains("firstName=")) {
+					String vals[] = val.split("=");
+					firstName = vals[1];
+				} else if (val.contains("lastName=")) {
+					String vals[] = val.split("=");
+					lastName = vals[1];
+				} else if (val.contains("gender=")) {
+					String vals[] = val.split("=");
+					String gender = vals[1];
+					g = Gender.getByValue(gender);
+				} else if (val.contains("employeeType=")) {
+					String vals[] = val.split("=");
+					String employeeType = vals[1];
+					type = EmployeeType.getByValue(employeeType);
+				}
+			}
+			
+			if (matches) {
+				emp = new Employee();
+				emp.setId(id);
+				emp.setFirstName(firstName);
+				emp.setLastName(lastName);
+				emp.setGender(g);
+				emp.setEmployeeType(type);
+				return emp;
+			}
+		}
+		return emp;
+	}
+	
 	Employee searchByUsernameAndPassword(String username, String password) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		
@@ -240,16 +293,17 @@ public class EmployeeDao {
 		return emp;
 	}
 	
-	public void removeEmployee(Employee emp) throws IOException {
+	public void removeEmployee(Integer id) throws IOException {
 		//Find the line, store it in string builder and replace the content with empty string
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+		
 		String line = reader.readLine();
 		StringBuilder builder = new StringBuilder();
 		while (line != null) {
 			String[] values = line.split(", ");
 			boolean matches = false;
 			for (String val : values) {
-				if (val.contains("id") && val.equals("id=" + emp.getId())) {
+				if (val.contains("id") && val.equals("id=" + id)) {
 					matches = true;
 					break;
 				}
@@ -259,6 +313,7 @@ public class EmployeeDao {
 			} else {
 				builder.append(line);
 			}
+			builder.append("\n");
 			line = reader.readLine();
 		}
 		reader.close();

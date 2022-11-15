@@ -21,14 +21,16 @@ public class EmployeeService {
 	 * 
 	 * @param id
 	 * @return
+	 * @throws IOException
 	 */
-	public Employee searchById(Integer id) {
+	public Employee searchById(Integer id) throws IOException {
 		//		for (Employee emp : EmployeeDao.employeeList) {
 		//			if (emp != null && emp.getId() == id) {
 		//				return emp;
 		//			}
 		//		}
-		return null;
+		EmployeeDao dao = new EmployeeDao();
+		return dao.searchById(id);
 	}
 	
 	boolean removeEmployee(Integer id) throws IOException {
@@ -41,7 +43,7 @@ public class EmployeeService {
 		}
 		
 		EmployeeDao dao = new EmployeeDao();
-		dao.removeEmployee(emp);
+		dao.removeEmployee(id);
 		
 		System.out.println("Removed the account successfully!");
 		
