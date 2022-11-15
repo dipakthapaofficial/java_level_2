@@ -1,5 +1,6 @@
 package com.codeinteracts.ems;
 
+import java.io.IOException;
 
 public class LoginService {
 	
@@ -12,15 +13,26 @@ public class LoginService {
 	 */
 	Employee login(String username, String password) {
 		
-		for (Employee emp : EmployeeService.employeeList) {
-
-			if (emp != null && emp.getUsername().equals(username) && emp.getPassword().equals(password)) {
-				return emp;
-			}
-			
+		//		for (Employee emp : EmployeeDao.employeeList) {
+		//
+		//			if (emp != null && emp.getUsername().equals(username) && emp.getPassword().equals(password)) {
+		//				return emp;
+		//			}
+		//			
+		//		}
+		
+		EmployeeDao dao = new EmployeeDao();
+		
+		Employee emp = null;
+		try {
+			emp = dao.searchByUsernameAndPassword(username, password);
+		}
+		catch (IOException e) {
+			System.out.println("Some issue occurred");
+			e.printStackTrace();
 		}
 		
-		return null;
+		return emp;
 	}
 	
 }
