@@ -1,5 +1,6 @@
 package com.codeinteracts.ems;
 
+import java.util.Objects;
 
 public class Employee {
 	
@@ -95,4 +96,22 @@ public class Employee {
 		        + ", username=" + username + ", employeeType=" + employeeType + "]";
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(employeeType, firstName, gender, id, lastName, password, username);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return employeeType == other.employeeType && Objects.equals(firstName, other.firstName) && gender == other.gender
+		        && Objects.equals(id, other.id) && Objects.equals(lastName, other.lastName)
+		        && Objects.equals(password, other.password) && Objects.equals(username, other.username);
+	}
 }

@@ -48,8 +48,9 @@ public class Main {
 					System.out.println("2. View Profile");
 					System.out.println("3. Edit Profile");
 					System.out.println("4. View All");
-					System.out.println("5. Remove Employee");
-					System.out.println("6. Logout");
+					System.out.println("5. Search by id");
+					System.out.println("6. Remove Employee");
+					System.out.println("7. Logout");
 					System.out.println("Enter your choice::");
 					
 					choice = scan.nextInt();
@@ -58,17 +59,21 @@ public class Main {
 						empService.addEmployee(scan);
 					} else if (choice == 2) {
 						//View Profile
+						empService.viewProfile(emp);
 					} else if (choice == 3) {
 						//Edit Profile
+						empService.editProfile(emp, scan);
 					} else if (choice == 4) {
 						//View all employee
 						empService.viewAll();
 					} else if (choice == 5) {
-						//Remove Employee
-						String[] a = new String[5];
-						a[0] = "10";
-						a[0] = null;
+						//Search employee
+						
 					} else if (choice == 6) {
+						//Remove Employee
+						empService.removeEmployee(scan);
+						
+					} else if (choice == 7) {
 						//Logout
 						System.out.println("Logged out successfully!");
 						break;
@@ -77,15 +82,30 @@ public class Main {
 					}
 				}
 				
-
 			} else if (emp.getEmployeeType() == EmployeeType.USER) {
-				//User functionalities
-				System.out.println("1. View Profile");
-				System.out.println("2. Edit Profile");
-				System.out.println("3. Logout");
-				System.out.println("Enter your choice::");
+				while (true) {
+					//User functionalities
+					System.out.println("1. View Profile");
+					System.out.println("2. Edit Profile");
+					System.out.println("3. Logout");
+					System.out.println("Enter your choice::");
+					
+					choice = scan.nextInt();
+					if (choice == 1) {
+						//View Profile
+						empService.viewProfile(emp);
+					} else if (choice == 2) {
+						//Edit Profile
+						empService.editProfile(emp, scan);
+					} else if (choice == 3) {
+						//Logout
+						System.out.println("Logged out successfully!");
+						break;
+					} else {
+						System.out.println("Invalid Choice.");
+					}
+				}
 			}
-			
 			
 		}
 		
