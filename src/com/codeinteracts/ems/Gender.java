@@ -1,6 +1,10 @@
 package com.codeinteracts.ems;
 
-
+/**
+ * Enum for gender
+ * 
+ * @author ubuntu
+ */
 public enum Gender {
 	
 	MALE("MALE"),
