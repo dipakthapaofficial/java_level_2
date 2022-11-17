@@ -109,7 +109,7 @@ public class Main {
 						String password1 = scan.next();
 						
 						//Set id based on array index value
-						int id = EmployeeDao.runningId++;
+						//	int id = EmployeeDao.runningId++;
 						
 						Employee emp1 = new Employee(firstName, lastName, g, username1, password1, type);
 						

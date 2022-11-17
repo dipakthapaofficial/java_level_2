@@ -1,7 +1,7 @@
 id=1, firstName=admin, lastName=admin, gender=OTHERS, username=admin, password=admin, employeeType=ADMIN
 id=2, firstName=ramesh, lastName=ramesh, gender=MALE, username=ramesh, password=ramesh, employeeType=USER
 id=3, firstName=dipak, lastName=dipak, gender=MALE, username=dipak, password=dipak, employeeType=USER
-
+id=4, firstName=gopal, lastName=gopal, gender=MALE, username=gopal, password=gopal, employeeType=USER
 
 
 

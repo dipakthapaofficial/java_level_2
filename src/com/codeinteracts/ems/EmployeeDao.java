@@ -2,6 +2,7 @@ package com.codeinteracts.ems;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class EmployeeDao {
 	//	
 	//	static int index = 0;
 	//	
-	static int runningId = 1;
+	//	static int runningId = 1;
 	
 	//	
 	//	static {
@@ -171,9 +172,9 @@ public class EmployeeDao {
 			EmployeeType type = null;
 			
 			for (String val : values) {
-				if (val.contains("username") && val.equals("username=" + username)) {
+				if (val.equals("username=" + username)) {
 					count++;
-				} else if (val.contains("password") && val.equals("password=" + password)) {
+				} else if (val.equals("password=" + password)) {
 					count++;
 				}
 				
@@ -218,18 +219,18 @@ public class EmployeeDao {
 	
 	Employee addEmployee(Employee emp) throws IOException {
 		//Count number of lines in file and generate id based on that
-		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader(new File("employee.txt")));
 		int count = (int) reader.lines().count();
 		emp.setId(++count);
 		reader.close();
 		
 		BufferedWriter bw = new BufferedWriter(new FileWriter("employee.txt", true));
 		bw.write(emp.toString());
+		//		bw.newLine();
 		bw.write("\n");
 		bw.flush();
 		
-		System.out.println("Employee added successfully!");
-		
+
 		bw.close();
 		return emp;
 	}
