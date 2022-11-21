@@ -7,46 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class EmployeeDao {
-	
-	//Storage Point
-	//	static Employee[] employeeList = new Employee[100];
-	//	
-	//	static int index = 0;
-	//	
-	//	static int runningId = 1;
-	
-	//	
-	//	static {
-	//		Employee emp = new Employee();
-	//		emp.setId(runningId++);
-	//		emp.setFirstName("Admin");
-	//		emp.setLastName("Admin");
-	//		emp.setGender(Gender.OTHERS);
-	//		emp.setEmployeeType(EmployeeType.ADMIN);
-	//		emp.setUsername("admin");
-	//		emp.setPassword("admin");
-	//		
-	//		
-	//		EmployeeDao.employeeList[EmployeeDao.index++] = emp;
-	//		
-	//	}
-	//	
-	//		Employee addEmployee(Employee emp) {
-	//			EmployeeDao.employeeList[EmployeeDao.index++] = emp;
-	//			
-	//			System.out.println("Employee added successfully!");
-	//			
-	//			return emp;
-	//		}
-	//	
-	//	public void removeEmployee(Employee emp) {
-	//		int index = emp.getId() - 1;
-	//		EmployeeDao.employeeList[index] = null;
-	//		System.out.println("Removed successfully.");
-	//		
-	//	}
-	//
+public class EmployeeDao implements EmployeeDaoInterface {
 	
 	/**
 	 * Directly searching and replacing is not possible, we copy the content of file in string
@@ -56,6 +17,7 @@ public class EmployeeDao {
 	 * @param emp
 	 * @throws IOException
 	 */
+	@Override
 	public void editEmployee(Employee emp) throws IOException {
 		//Find the line, store it in string builder and replace the content with new employee object
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
@@ -90,6 +52,7 @@ public class EmployeeDao {
 		
 	}
 	
+	@Override
 	public void viewAll() throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		String line = reader.readLine();
@@ -102,6 +65,8 @@ public class EmployeeDao {
 	
 	//File Storage
 	
+	@Override
+	public
 	Employee searchById(Integer id) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		
@@ -155,7 +120,8 @@ public class EmployeeDao {
 		return emp;
 	}
 	
-	Employee searchByUsernameAndPassword(String username, String password) throws IOException {
+	@Override
+	public Employee searchByUsernameAndPassword(String username, String password) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		
 		String line = reader.readLine();
@@ -217,7 +183,8 @@ public class EmployeeDao {
 		return emp;
 	}
 	
-	Employee addEmployee(Employee emp) throws IOException {
+	@Override
+	public Employee addEmployee(Employee emp) throws IOException {
 		//Count number of lines in file and generate id based on that
 		BufferedReader reader = new BufferedReader(new FileReader(new File("employee.txt")));
 		int count = (int) reader.lines().count();
@@ -235,6 +202,7 @@ public class EmployeeDao {
 		return emp;
 	}
 	
+	@Override
 	public Employee searchByUsername(String username) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		
@@ -294,6 +262,7 @@ public class EmployeeDao {
 		return emp;
 	}
 	
+	@Override
 	public void removeEmployee(Integer id) throws IOException {
 		//Find the line, store it in string builder and replace the content with empty string
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));

@@ -1,6 +1,7 @@
 package com.codeinteracts.ems;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -116,7 +117,7 @@ public class Main {
 						try {
 							empService.addEmployee(emp1);
 						}
-						catch (IOException e) {
+						catch (IOException | ClassNotFoundException | SQLException e) {
 							System.out.println("Can't add employee. Please try again later.");
 							e.printStackTrace();
 						}

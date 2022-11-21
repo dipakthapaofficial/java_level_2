@@ -1,19 +1,14 @@
 package com.codeinteracts.ems;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class EmployeeService {
 	
 	public void viewAll() throws IOException {
-		//		for (Employee emp : EmployeeDao.employeeList) {
-		//			if (emp != null) {
-		//				System.out.println(emp);
-		//			}
-		//			
-		//		}
-		
-		EmployeeDao dao = new EmployeeDao();
+		EmployeeDaoInterface dao = new EmployeeDao();
 		dao.viewAll();
+		
 	}
 	
 	/**
@@ -24,12 +19,8 @@ public class EmployeeService {
 	 * @throws IOException
 	 */
 	public Employee searchById(Integer id) throws IOException {
-		//		for (Employee emp : EmployeeDao.employeeList) {
-		//			if (emp != null && emp.getId() == id) {
-		//				return emp;
-		//			}
-		//		}
-		EmployeeDao dao = new EmployeeDao();
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
+		
 		return dao.searchById(id);
 	}
 	
@@ -42,7 +33,7 @@ public class EmployeeService {
 			return false;
 		}
 		
-		EmployeeDao dao = new EmployeeDao();
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
 		dao.removeEmployee(id);
 		
 		System.out.println("Removed the account successfully!");
@@ -67,13 +58,13 @@ public class EmployeeService {
 	 * @throws IOException
 	 */
 	public void editProfile(Employee emp) throws IOException {
-		EmployeeDao dao = new EmployeeDao();
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
 		dao.editEmployee(emp);
 		System.out.println("Edited Successfully.");
 	}
 	
-	public Employee addEmployee(Employee emp) throws IOException {
-		EmployeeDao dao = new EmployeeDao();
+	public Employee addEmployee(Employee emp) throws IOException, SQLException, ClassNotFoundException {
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
 		dao.addEmployee(emp);
 		System.out.println("Employee added successfully!");
 		return emp;
@@ -87,7 +78,7 @@ public class EmployeeService {
 		//				}
 		//			}
 		
-		EmployeeDao dao = new EmployeeDao();
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
 		Employee emp = null;
 		try {
 			emp = dao.searchByUsername(username);
