@@ -165,6 +165,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	@Override
 	public Employee searchByUsernameAndPassword(String username, String password) throws IOException {
 		// TODO Auto-generated method stub
+		//Added a new comment
 		return null;
 	}
 	
