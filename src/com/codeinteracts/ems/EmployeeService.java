@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class EmployeeService {
 	
 	public void viewAll() throws IOException {
-		EmployeeDaoInterface dao = new EmployeeDao();
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
 		dao.viewAll();
 		
 	}

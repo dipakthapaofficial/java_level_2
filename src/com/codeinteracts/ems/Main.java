@@ -179,6 +179,21 @@ public class Main {
 						}
 					} else if (choice == 5) {
 						//Search employee
+						System.out.println("Enter id to search::");
+						int id = scan.nextInt();
+						try {
+							Employee emp1 = empService.searchById(id);
+							if (emp1 != null) {
+								System.out.println(emp1.toString());
+							} else {
+								System.out.println("\n\n\n Employee not present. \n\n\n");
+								
+							}
+						}
+						catch (IOException e) {
+							System.out.println("Failed to get records.");
+							e.printStackTrace();
+						}
 						
 					} else if (choice == 6) {
 						//Remove Employee

@@ -21,6 +21,44 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		
 	}
 	
+	public void addTable() {
+		Connection con = null;
+		Statement statement = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			
+			//			String query = "Create table if not exists emp1 (id int not null, fistname varchar(20) not null)";
+			
+			StringBuilder query = new StringBuilder();
+			query.append("Create table if not exists emp1 (id int not null, fistname varchar(20) not null)");
+			
+			statement = con.createStatement();
+			statement.execute(query.toString());
+			
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				statement.close();
+				con.close();
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
+	
 	@Override
 	public void viewAll() throws IOException {
 		Connection con = null;
@@ -31,20 +69,24 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			
 			String query = "SELECT * from employee";
 			
-			System.out.println(query);
+			//			System.out.println(query);
 			
 			statement = con.createStatement();
+			
 			ResultSet results = statement.executeQuery(query);
 			
 			while (results.next()) {
+				
 				System.out.println(results.getInt(1));
 				System.out.println(results.getString(2));
 				System.out.println(results.getString(3));
 				System.out.println(results.getString(4));
 				System.out.println(results.getString(5));
 				System.out.println(results.getString(6));
+				System.out.println(results.getBoolean(8));
+				
 			}
-
+			
 		}
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -73,8 +115,51 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	
 	@Override
 	public Employee searchById(Integer id) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = null;
+		Statement statement = null;
+		Employee emp = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			
+			String query = "select * from employee where id =" + id;
+			
+			statement = con.createStatement();
+			ResultSet results = statement.executeQuery(query);
+			
+			while (results.next()) {
+				emp = new Employee();
+				emp.setId(results.getInt(1));
+				emp.setFirstName(results.getString(2));
+				emp.setLastName(results.getString(3));
+				emp.setGender(Gender.getByValue(results.getString(4)));
+				emp.setUsername(results.getString(5));
+				emp.setPassword(results.getString(6));
+				emp.setEmployeeType(EmployeeType.valueOf(results.getString(7)));
+			}
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				statement.close();
+				con.close();
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return emp;
+		
 	}
 	
 	@Override
@@ -96,7 +181,52 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		System.out.println(insertQuery);
 		
 		Statement statement = con.createStatement();
-		statement.executeUpdate(insertQuery);
+		int resultValue = statement.executeUpdate(insertQuery);
+		
+		
+		//Batch insertation example
+		
+		//		insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)" + "value ( '"
+		//		        + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
+		//		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		//		
+		//		statement.addBatch(insertQuery);
+		//		
+		//		insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)" + "value ( '"
+		//		        + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
+		//		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		//		
+		//		statement.addBatch(insertQuery);
+		//		
+		//		insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)" + "value ( '"
+		//		        + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
+		//		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		//		
+		//		statement.addBatch(insertQuery);
+		//		
+		//		insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)" + "value ( '"
+		//		        + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
+		//		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		//		
+		//		statement.addBatch(insertQuery);
+		//		
+		//		insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)" + "value ( '"
+		//		        + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
+		//		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		//		
+		//		statement.addBatch(insertQuery);
+		//		
+		//		insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)" + "value ( '"
+		//		        + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
+		//		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		//		
+		//		statement.addBatch(insertQuery);
+		//		
+		//		statement.executeBatch();
+		
+		if (resultValue == 2) {
+			System.out.println("Failed to insert/update data. Check your data and try again.");
+		}
 		
 		statement.close();
 		con.close();
