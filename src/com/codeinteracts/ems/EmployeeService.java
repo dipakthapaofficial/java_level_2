@@ -24,19 +24,17 @@ public class EmployeeService {
 		return dao.searchById(id);
 	}
 	
-	boolean removeEmployee(Integer id) throws IOException {
+	boolean removeEmployee(String id) throws IOException {
 		System.out.println("Enter employee id::");
 		
-		Employee emp = this.searchById(id);
-		if (emp == null) {
-			System.out.println("Employee id is not valid!!!");
-			return false;
-		}
+		//		Employee emp = this.searchById(id);
+		//		if (emp == null) {
+		//			System.out.println("Employee id is not valid!!!");
+		//			return false;
+		//		}
 		
 		EmployeeDaoInterface dao = new EmployeeDaoDB();
 		dao.removeEmployee(id);
-		
-		System.out.println("Removed the account successfully!");
 		
 		return false;
 	}
@@ -70,6 +68,19 @@ public class EmployeeService {
 		return emp;
 	}
 	
+	public Employee searchByUsername(String username) {
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
+		Employee emp = null;
+		try {
+			emp = dao.searchByUsername(username);
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Some issue occurred");
+			e.printStackTrace();
+		}
+		return emp;
+	}
 	
 	public boolean checkIfUserNameExists(String username) {
 		//			for (Employee emp : EmployeeDao.employeeList) {

@@ -49,7 +49,8 @@ public class Main {
 					System.out.println("4. View All");
 					System.out.println("5. Search by id");
 					System.out.println("6. Remove Employee");
-					System.out.println("7. Logout");
+					System.out.println("7. Search by Username");
+					System.out.println("8. Logout");
 					System.out.println("Enter your choice::");
 					
 					choice = scan.nextInt();
@@ -198,8 +199,9 @@ public class Main {
 					} else if (choice == 6) {
 						//Remove Employee
 						System.out.println("Enter employee id::");
-						Integer id = scan.nextInt();
-						
+						Scanner sc = new Scanner(System.in);
+						String id = sc.nextLine();
+						System.out.println("id=" + id);
 						try {
 							empService.removeEmployee(id);
 						}
@@ -209,6 +211,24 @@ public class Main {
 						}
 						
 					} else if (choice == 7) {
+						//Search Employee by username
+						System.out.println("Enter username::");
+						String username1 = scan.next();
+						try {
+							Employee emp1 = empService.searchByUsername(username1);
+							if (emp1 != null) {
+								System.out.println(emp1);
+							} else {
+								System.out.println("Employee with that username not present");
+							}
+							
+						}
+						catch (Exception e) {
+							System.out.println("Failed to Fetch employee!!");
+							e.printStackTrace();
+						}
+						
+					} else if (choice == 8) {
 						//Logout
 						System.out.println("Logged out successfully!");
 						break;

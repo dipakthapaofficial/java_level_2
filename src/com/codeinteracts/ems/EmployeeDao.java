@@ -122,6 +122,7 @@ public class EmployeeDao implements EmployeeDaoInterface {
 	
 	@Override
 	public Employee searchByUsernameAndPassword(String username, String password) throws IOException {
+		System.out.println("Inside search by username and password method.. EmployeeDao method.. File store");
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		
 		String line = reader.readLine();
@@ -263,7 +264,7 @@ public class EmployeeDao implements EmployeeDaoInterface {
 	}
 	
 	@Override
-	public void removeEmployee(Integer id) throws IOException {
+	public void removeEmployee(String id) throws IOException {
 		//Find the line, store it in string builder and replace the content with empty string
 		BufferedReader reader = new BufferedReader(new FileReader("employee.txt"));
 		

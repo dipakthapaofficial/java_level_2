@@ -13,15 +13,11 @@ public class LoginService {
 	 */
 	Employee login(String username, String password) {
 		
-		//		for (Employee emp : EmployeeDao.employeeList) {
-		//
-		//			if (emp != null && emp.getUsername().equals(username) && emp.getPassword().equals(password)) {
-		//				return emp;
-		//			}
-		//			
-		//		}
+		//		EmployeeDaoInterface dao = new EmployeeDaoStatic();
 		
-		EmployeeDao dao = new EmployeeDao();
+		EmployeeDaoInterface dao = new EmployeeDaoDB();
+		
+		//		EmployeeDaoInterface dao = new EmployeeDao();
 		
 		Employee emp = null;
 		try {

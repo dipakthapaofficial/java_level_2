@@ -25,6 +25,7 @@ public class EmployeeDaoStatic implements EmployeeDaoInterface {
 		
 	}
 	
+
 	@Override
 	public Employee addEmployee(Employee emp) {
 		EmployeeDaoStatic.employeeList[EmployeeDaoStatic.index++] = emp;
@@ -71,7 +72,14 @@ public class EmployeeDaoStatic implements EmployeeDaoInterface {
 	
 	@Override
 	public Employee searchByUsernameAndPassword(String username, String password) throws IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Inside search by username and password method.. EmployeeDaoStatic");
+		for (Employee emp : employeeList) {
+			
+			if (emp != null && emp.getUsername().equals(username) && emp.getPassword().equals(password)) {
+				return emp;
+			}
+			
+		}
 		return null;
 	}
 	
@@ -82,7 +90,7 @@ public class EmployeeDaoStatic implements EmployeeDaoInterface {
 	}
 	
 	@Override
-	public void removeEmployee(Integer id) throws IOException {
+	public void removeEmployee(String id) throws IOException {
 		// TODO Auto-generated method stub
 		
 	}

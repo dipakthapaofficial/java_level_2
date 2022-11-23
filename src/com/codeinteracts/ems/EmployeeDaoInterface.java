@@ -17,5 +17,5 @@ public interface EmployeeDaoInterface {
 	
 	public Employee searchByUsername(String username) throws IOException;
 	
-	public void removeEmployee(Integer id) throws IOException;
+	public void removeEmployee(String id) throws IOException;
 }

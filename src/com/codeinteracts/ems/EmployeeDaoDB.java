@@ -3,6 +3,7 @@ package com.codeinteracts.ems;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -77,6 +78,10 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			
 			while (results.next()) {
 				
+				if (results.getString(7).equals("ADMIN")) {
+					continue;
+				}
+				
 				System.out.println(results.getInt(1));
 				System.out.println(results.getString(2));
 				System.out.println(results.getString(3));
@@ -107,8 +112,6 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			}
 			
 		}
-		
-		
 		
 		
 	}
@@ -164,9 +167,53 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	
 	@Override
 	public Employee searchByUsernameAndPassword(String username, String password) throws IOException {
-		// TODO Auto-generated method stub
-		//Added a new comment
-		return null;
+		System.out.println("Inside search by username and password method.. EmployeeDaoDb. DB store \n\n");
+		Connection con = null;
+		Statement statement = null;
+		Employee emp = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			
+			String query = "select * from employee where username ='" + username + "' and password='" + password + "'";
+			
+			System.out.println(query);
+			
+			statement = con.createStatement();
+			ResultSet results = statement.executeQuery(query);
+			
+			while (results.next()) {
+				emp = new Employee();
+				emp.setId(results.getInt(1));
+				emp.setFirstName(results.getString(2));
+				emp.setLastName(results.getString(3));
+				emp.setGender(Gender.getByValue(results.getString(4)));
+				emp.setUsername(results.getString(5));
+				emp.setPassword(results.getString(6));
+				emp.setEmployeeType(EmployeeType.valueOf(results.getString(7)));
+			}
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				statement.close();
+				con.close();
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return emp;
 	}
 	
 	@Override
@@ -175,13 +222,25 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		
 		Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		
+		//		String insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)"
+		//		        + "value ( '" + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
+		//		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		
 		String insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)"
-		        + "value ( '" + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"
-		        + emp.getUsername() + "', '" + emp.getPassword() + "', '" + emp.getEmployeeType().value + "')";
+		        + "value (?, ?, ?, ?, ?, ?)";
 		
 		System.out.println(insertQuery);
 		
-		Statement statement = con.createStatement();
+		//		Statement statement = con.createStatement();
+		
+		PreparedStatement statement = con.prepareStatement(insertQuery);
+		statement.setString(1, emp.getFirstName());
+		statement.setString(5, emp.getPassword());
+		statement.setString(6, emp.getEmployeeType().value);
+		statement.setString(2, emp.getLastName());
+		statement.setString(3, emp.getGender().value);
+		statement.setString(4, emp.getUsername());
+
 		int resultValue = statement.executeUpdate(insertQuery);
 		
 		
@@ -225,8 +284,8 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		//		
 		//		statement.executeBatch();
 		
-		if (resultValue == 2) {
-			System.out.println("Failed to insert/update data. Check your data and try again.");
+		if (resultValue == 0) {
+			System.out.println("Failed to insert data. Check your data and try again.");
 		}
 		
 		statement.close();
@@ -238,13 +297,102 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	
 	@Override
 	public Employee searchByUsername(String username) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = null;
+		Statement statement = null;
+		Employee emp = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			
+			String query = "select * from employee where username ='" + username + "'";
+			
+			System.out.println(query);
+			
+			statement = con.createStatement();
+			ResultSet results = statement.executeQuery(query);
+			
+			while (results.next()) {
+				emp = new Employee();
+				emp.setId(results.getInt(1));
+				emp.setFirstName(results.getString(2));
+				emp.setLastName(results.getString(3));
+				emp.setGender(Gender.getByValue(results.getString(4)));
+				emp.setUsername(results.getString(5));
+				emp.setPassword(results.getString(6));
+				emp.setEmployeeType(EmployeeType.valueOf(results.getString(7)));
+			}
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				statement.close();
+				con.close();
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return emp;
 	}
 	
 	@Override
-	public void removeEmployee(Integer id) throws IOException {
+	public void removeEmployee(String id) throws IOException {
 		// TODO Auto-generated method stub
+		Connection con = null;
+//		Statement statement = null;
+		PreparedStatement statement = null;
+		Employee emp = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			
+			String query = "DELETE from employee where id=?";
+			
+			statement = con.prepareStatement(query);
+			
+			statement.setString(1, id);
+			
+			System.out.println(statement.toString());
+
+			int rowsAffected = statement.executeUpdate(query);
+			
+			System.out.println("rows==" + rowsAffected);
+			if (rowsAffected > 0) {
+				System.out.println("Successfully Deleted!!");
+			} else {
+				System.out.println("Failed to delete record");
+			}
+			
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				statement.close();
+				con.close();
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 		
 	}
 	
