@@ -22,18 +22,19 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
-			String updateQuery = "UPDATE employee (first_name, last_name, gender, username, password, employee_type)"
-			        + "value (?, ?, ?, ?, ?, ?)";
+			String updateQuery = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
 			
 			System.out.println(updateQuery);
 			
 			PreparedStatement statement = con.prepareStatement(updateQuery);
 			statement.setString(1, emp.getFirstName());
-			statement.setString(5, emp.getPassword());
-			statement.setString(6, emp.getEmployeeType().value);
 			statement.setString(2, emp.getLastName());
 			statement.setString(3, emp.getGender().value);
-			statement.setString(4, emp.getUsername());
+			statement.setString(4, emp.getPassword());
+			statement.setString(5, emp.getEmployeeType().value);
+			
+			//Set id for where clause
+			statement.setInt(6, emp.getId());
 			
 			int resultValue = statement.executeUpdate();
 			
