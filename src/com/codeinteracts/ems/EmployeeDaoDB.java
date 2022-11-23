@@ -241,7 +241,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		statement.setString(3, emp.getGender().value);
 		statement.setString(4, emp.getUsername());
 
-		int resultValue = statement.executeUpdate(insertQuery);
+		int resultValue = statement.executeUpdate();
 		
 		
 		//Batch insertation example
@@ -364,7 +364,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			
 			System.out.println(statement.toString());
 
-			int rowsAffected = statement.executeUpdate(query);
+			int rowsAffected = statement.executeUpdate();
 			
 			System.out.println("rows==" + rowsAffected);
 			if (rowsAffected > 0) {

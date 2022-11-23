@@ -199,9 +199,7 @@ public class Main {
 					} else if (choice == 6) {
 						//Remove Employee
 						System.out.println("Enter employee id::");
-						Scanner sc = new Scanner(System.in);
-						String id = sc.nextLine();
-						System.out.println("id=" + id);
+						String id = scan.next();
 						try {
 							empService.removeEmployee(id);
 						}
