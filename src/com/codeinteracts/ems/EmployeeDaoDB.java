@@ -18,7 +18,41 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	
 	@Override
 	public void editEmployee(Employee emp) throws IOException {
-		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			
+			String updateQuery = "UPDATE employee (first_name, last_name, gender, username, password, employee_type)"
+			        + "value (?, ?, ?, ?, ?, ?)";
+			
+			System.out.println(updateQuery);
+			
+			PreparedStatement statement = con.prepareStatement(updateQuery);
+			statement.setString(1, emp.getFirstName());
+			statement.setString(5, emp.getPassword());
+			statement.setString(6, emp.getEmployeeType().value);
+			statement.setString(2, emp.getLastName());
+			statement.setString(3, emp.getGender().value);
+			statement.setString(4, emp.getUsername());
+			
+			int resultValue = statement.executeUpdate();
+			
+			if (resultValue > 0) {
+				System.out.println("Update successful");
+			} else {
+				System.out.println("Update failed");
+			}
+			
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 	
@@ -26,7 +60,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		Connection con = null;
 		Statement statement = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
 			//			String query = "Create table if not exists emp1 (id int not null, fistname varchar(20) not null)";
@@ -65,7 +99,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		Connection con = null;
 		Statement statement = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
 			String query = "SELECT * from employee";
@@ -113,7 +147,6 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			
 		}
 		
-		
 	}
 	
 	@Override
@@ -122,7 +155,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		Statement statement = null;
 		Employee emp = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
 			String query = "select * from employee where id =" + id;
@@ -172,7 +205,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		Statement statement = null;
 		Employee emp = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
 			String query = "select * from employee where username ='" + username + "' and password='" + password + "'";
@@ -218,7 +251,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	
 	@Override
 	public Employee addEmployee(Employee emp) throws IOException, SQLException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		
@@ -240,9 +273,8 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		statement.setString(2, emp.getLastName());
 		statement.setString(3, emp.getGender().value);
 		statement.setString(4, emp.getUsername());
-
-		int resultValue = statement.executeUpdate();
 		
+		int resultValue = statement.executeUpdate();
 		
 		//Batch insertation example
 		
@@ -301,7 +333,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		Statement statement = null;
 		Employee emp = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
 			String query = "select * from employee where username ='" + username + "'";
@@ -349,11 +381,10 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	public void removeEmployee(String id) throws IOException {
 		// TODO Auto-generated method stub
 		Connection con = null;
-//		Statement statement = null;
+		//		Statement statement = null;
 		PreparedStatement statement = null;
-		Employee emp = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
 			String query = "DELETE from employee where id=?";
@@ -363,7 +394,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			statement.setString(1, id);
 			
 			System.out.println(statement.toString());
-
+			
 			int rowsAffected = statement.executeUpdate();
 			
 			System.out.println("rows==" + rowsAffected);
