@@ -65,10 +65,8 @@ public class StaticListEmpDao implements EmployeeDaoInterface {
 	}
 	
 	@Override
-	public void removeEmployee(Integer id) throws IOException {
-		//		int index = emp.getId() - 1;
-		//		EmployeeDaoStatic.employeeList[index] = null;
-		//		System.out.println("Removed successfully.");
+	public void removeEmployee(String id) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 	

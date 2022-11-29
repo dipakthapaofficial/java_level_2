@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.sql.Statement;
 
 public class EmployeeDaoDB implements EmployeeDaoInterface {
@@ -22,9 +23,48 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			
+			
 			String updateQuery = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
+			String updateQuery2 = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
+			
+			//			con.setAutoCommit(false);
+			
+			Savepoint point = con.setSavepoint();
+			//			
+			//			String updateQuery3 = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
+			//			
+			//			
+			//			String updateQuery4 = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
+			//	
+			Savepoint point1 = con.setSavepoint();
+			try {
+				//				
+				//			String updateQuery6 = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
+				//		Exceute query
+				//commmit
+			}
+			catch (Exception e) {
+				//If exception occurs revert to point1
+			}
+			
+			//			
+			//			String updateQuery6 = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
+			//			
+			
+			Savepoint point2 = con.setSavepoint();
+			try {
+				//				
+				//			String updateQuery6 = "UPDATE employee set first_name=?, last_name=?, gender=?, password=?, employee_type=? where id=?";
+				//		Exceute query
+			}
+			catch (Exception e) {
+				//If exception occurs revert to point2
+				con.rollback(point2);
+				return;
+			}
 			
 			System.out.println(updateQuery);
+			
 			
 			PreparedStatement statement = con.prepareStatement(updateQuery);
 			statement.setString(1, emp.getFirstName());
@@ -37,6 +77,11 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			statement.setInt(6, emp.getId());
 			
 			int resultValue = statement.executeUpdate();
+			
+			//			con.commit();
+			
+			//			con.rollback();
+			con.rollback(point);
 			
 			if (resultValue > 0) {
 				System.out.println("Update successful");
@@ -161,6 +206,9 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			
 			String query = "select * from employee where id =" + id;
 			
+			//			CallableStatement st = (CallableStatement) con.prepareCall("statement.name");
+			//			st.execute();
+			
 			statement = con.createStatement();
 			ResultSet results = statement.executeQuery(query);
 			
@@ -277,7 +325,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 		
 		int resultValue = statement.executeUpdate();
 		
-		//Batch insertation example
+		//Batch insertion example
 		
 		//		insertQuery = "INSERT INTO employee (first_name, last_name, gender, username, password, employee_type)" + "value ( '"
 		//		        + emp.getFirstName() + "', '" + emp.getLastName() + "', '" + emp.getGender().value + "', '"

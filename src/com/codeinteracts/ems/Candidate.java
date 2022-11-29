@@ -10,4 +10,9 @@ public class Candidate {
 	String lastName;
 	
 	int voteCount;
+	
+	//Transaction management
+	
+	//Collection: Vectors, Set, Queue, Map
+	
 }
