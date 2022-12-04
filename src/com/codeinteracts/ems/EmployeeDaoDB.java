@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDaoDB implements EmployeeDaoInterface {
 	
@@ -144,6 +146,7 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 	public void viewAll() throws IOException {
 		Connection con = null;
 		Statement statement = null;
+		List<Employee> employeeList = new ArrayList<Employee>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -156,20 +159,35 @@ public class EmployeeDaoDB implements EmployeeDaoInterface {
 			
 			ResultSet results = statement.executeQuery(query);
 			
+//			while (results.next()) {
+//				
+//				if (results.getString(7).equals("ADMIN")) {
+//					continue;
+//				}
+//				
+//				System.out.println(results.getInt(1));
+//				System.out.println(results.getString(2));
+//				System.out.println(results.getString(3));
+//				System.out.println(results.getString(4));
+//				System.out.println(results.getString(5));
+//				System.out.println(results.getString(6));
+//				System.out.println(results.getBoolean(8));
+//				
+//			}
+			
+			
 			while (results.next()) {
 				
-				if (results.getString(7).equals("ADMIN")) {
-					continue;
-				}
+				Employee emp = new Employee();
+				emp.setId(results.getInt(1));
+				emp.setFirstName(results.getString(2));
+				emp.setLastName(results.getString(3));
+				emp.setGender(Gender.getByValue(results.getString(4)));
+				emp.setUsername(results.getString(5));
+				emp.setPassword(results.getString(6));
+				emp.setEmployeeType(EmployeeType.valueOf(results.getString(7)));
 				
-				System.out.println(results.getInt(1));
-				System.out.println(results.getString(2));
-				System.out.println(results.getString(3));
-				System.out.println(results.getString(4));
-				System.out.println(results.getString(5));
-				System.out.println(results.getString(6));
-				System.out.println(results.getBoolean(8));
-				
+				employeeList.add(emp);
 			}
 			
 		}
