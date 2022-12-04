@@ -11,7 +11,7 @@ public class ListReplace {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Integer[] nums = { 1, 2, 3, 4, 5, 6, 1, 1, 1, 9 };
+		Integer[] nums = { 1, 2, 3, 4, 5, 6, 1, 1, 1, 9, 10 };
 		List<Integer> numbers = new ArrayList<>(Arrays.asList(nums));
 		
 		ArrayList list = new ArrayList();
