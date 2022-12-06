@@ -1,11 +1,12 @@
-package src.com.codeinteracts.collection;
+package com.codeinteracts.collection;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 
-class Student implements Comparable<Student>{
+class Student  {
 	String name;
 	
 	Integer id;
@@ -16,13 +17,13 @@ class Student implements Comparable<Student>{
 		this.id = i;
 	}
 
-	@Override
-	public int compareTo(Student o) {
-		if (this.id > o.id) {
-			return 1;
-		}
-		return 0;
-	}
+//	@Override
+//	public int compareTo(Student o) {
+//		if (this.id > o.id) {
+//			return 1;
+//		}
+//		return 0;
+//	}
 
 	@Override
 	public String toString() {
@@ -79,6 +80,9 @@ public class SetDemo {
 		students.add(new Student("Ramesh", 11));
 		students.add(new Student("Ramesh", 12));
 		students.add(new Student("Ramesh", 3));
+		
+		List<Student> stuList = new ArrayList<>();
+		
 		
 		System.out.println(students);
 		
