@@ -132,6 +132,24 @@ public class SortDemo {
 		Collections.sort(names);
 		System.out.println(names);
 		
+		
+		List<Integer> numbers1 = new ArrayList<>();
+		
+		System.out.println(numbers1.getClass());
+		System.out.println(numbers1.getClass().getPackageName());
+		
+		
+		Object obj = numbers1;
+		
+		obj = new Integer(1);
+		
+		System.out.println(obj.getClass());
+		
+		
+		
+		
+		
+		
 
 	}
 
