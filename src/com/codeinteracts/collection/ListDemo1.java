@@ -34,6 +34,10 @@ public class ListDemo1 {
 		emp.add(new Emp("hari2"));
 
 		System.out.println(emp);
+		
+		
+		List<String> emp123 = emp.stream().map(employee -> employee.name.toUpperCase()).collect(Collectors.toList());
+		System.out.println(emp123);
 
 //		Iterator<Emp> iter = emp.iterator();
 //		
